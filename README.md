@@ -1,4 +1,4 @@
-#Virtual Pet
+# Virtual Pet
 
 A clean & obedient virtual pet made of JavaScript.
 
