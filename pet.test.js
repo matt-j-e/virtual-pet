@@ -8,4 +8,9 @@ describe("Runs tests on a JavaScript virtual pet", () => {
         expect(new Pet('Fido')).toBeInstanceOf(Pet);
     });
 
+    it("checks that the correct name is returned", () => {
+        const fido = new Pet('Fido');
+        expect(fido.name).toBe("Fido");
+    });
+
 });
