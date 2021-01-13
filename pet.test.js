@@ -44,11 +44,37 @@ describe("growUp", () => {
         expect(fido.hunger).toBe(5);
     });
 
-    it("decrements hungefitness by 3", () => {
+    it("decrements fitness by 3", () => {
         const fido = new Pet("Fido");
         fido.growUp();
         expect(fido.fitness).toBe(10-3);
     });
 
+});
+
+describe("walk", () => {
+    it("increments the pet's fitness by 4 every walk", () => {
+        const fido = new Pet("Fido");
+        fido.growUp();
+        fido.growUp();
+        fido.walk();
+        expect(fido.fitness).toBe(10-3-3+4);
+    });
+
+    it("increments the pet's fitness to a max of 10", () => {
+        const fido = new Pet("Fido");
+        fido.growUp();
+        fido.walk();
+        expect(fido.fitness).toBe(10);
+        fido.growUp();
+        fido.growUp();
+        fido.growUp();
+        fido.walk();
+        fido.walk();
+        fido.walk();
+        expect(fido.fitness).toBe(10);
+    });
+
+    
 });
 
