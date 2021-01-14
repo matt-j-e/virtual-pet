@@ -2,7 +2,7 @@ const {
     Pet
 } = require("./pet.js");
 
-describe("Checks on object setup", () => {
+describe("Object setup", () => {
 
     it("checks that an instance of an object is created", () => {
         expect(new Pet('Fido')).toBeInstanceOf(Pet);
@@ -92,6 +92,36 @@ describe("feed", () => {
         fido.feed();
         fido.feed();
         expect(fido.hunger).toBe(0);
+    });
+});
+
+describe("checkUp()", () => {
+    it("returns I need a walk where fitness < 4", () => {
+        const fido = new Pet("Fido");
+        fido.fitness = 2;
+        fido.hunger = 4;
+        expect(fido.checkUp()).toBe("I need a walk");
+    });
+
+    it("returns I hungry where fitness > 4", () => {
+        const fido = new Pet("Fido");
+        fido.fitness = 4;
+        fido.hunger = 6;
+        expect(fido.checkUp()).toBe("I am hungry");
+    });
+
+    it("returns I am hungry AND I need a walk where fitness < 4 and hunger > 4", () => {
+        const fido = new Pet("Fido");
+        fido.fitness = 2;
+        fido.hunger = 6;
+        expect(fido.checkUp()).toBe("I am hungry AND I need a walk");
+    });
+
+    it("returns I feel great when not hungry and not unfit", () => {
+        const fido = new Pet("Fido");
+        fido.fitness = 4;
+        fido.hunger = 4;
+        expect(fido.checkUp()).toBe("I feel great!");
     });
 });
 
