@@ -74,7 +74,24 @@ describe("walk", () => {
         fido.walk();
         expect(fido.fitness).toBe(10);
     });
+  
+});
 
-    
+describe("feed", () => {
+    it("decrements the pet's hunger by 3 every feed", () => {
+        const fido = new Pet("Fido");
+        fido.growUp();
+        fido.growUp();
+        fido.feed();
+        expect(fido.hunger).toBe(7);
+    });
+
+    it("decrements the pet's hunger to a minimum of 0", () => {
+        const fido = new Pet("Fido");
+        fido.growUp();
+        fido.feed();
+        fido.feed();
+        expect(fido.hunger).toBe(0);
+    });
 });
 
