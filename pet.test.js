@@ -143,3 +143,13 @@ describe("checkUp()", () => {
     });
 });
 
+describe("isAlive()", () => {
+    it("checks that 'true' is returned correctly based on the pet's current state", () => {
+        const fido = new Pet("Fido");
+        fido.age = 29;
+        fido.hunger = 9;
+        fido.fitness = 1;
+        expect(fido.isAlive).toBe(true);
+    });
+});
+

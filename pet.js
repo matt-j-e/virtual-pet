@@ -30,6 +30,12 @@ function Pet(name="Fido") {
     this.fitness = START_FITNESS;
 }
 
+Pet.prototype = {
+    get isAlive() {
+        return this.age < 30 && this.hunger < 10 && this.fitness > 0;
+    }
+};
+
 Pet.prototype.growUp = function() {
     this.age++
     this.hunger += HUNGER_INCREMENT;
