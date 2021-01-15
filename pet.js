@@ -23,9 +23,9 @@ const WALK_TRIGGER = 4;
 const FEED_TRIGGER = 4;
 
 const DEATH_TRIGGER = {
-    fitness: 1, // fitness level of 0 or less
-    hunger: 9, // hunger level of 10 or more
-    age: 29 // age of 30 or more
+    fitness: 0, // fitness level of 0 or less
+    hunger: 10, // hunger level of 10 or more
+    age: 30 // age of 30 or more
 }
 
 
@@ -38,7 +38,7 @@ function Pet(name="Fido") {
 
 Pet.prototype = {
     get isAlive() {
-        return this.age < 30 && this.hunger < 10 && this.fitness > 0;
+        return this.age < DEATH_TRIGGER.age && this.hunger < DEATH_TRIGGER.hunger && this.fitness > DEATH_TRIGGER.fitness;
     }
 };
 
