@@ -1,5 +1,15 @@
 const {
-    Pet
+    Pet,
+    START_HUNGER,
+    START_FITNESS,
+    MAXIMUM_FITNESS,
+    MINIMUM_HUNGER,
+    HUNGER_INCREMENT,
+    HUNGER_DECREMENT,
+    FITNESS_INCREMENT,
+    FITNESS_DECREMENT,
+    WALK_TRIGGER,
+    FEED_TRIGGER
 } = require("./pet.js");
 
 describe("Object setup", () => {
@@ -38,89 +48,97 @@ describe("growUp", () => {
         expect(fido.age).toBe(1);
     });
 
-    it("increments hunger by 5", () => {
+    it("increments hunger by HUNGER_INCREMENT", () => {
         const fido = new Pet("Fido");
         fido.growUp();
-        expect(fido.hunger).toBe(5);
+        expect(fido.hunger).toBe(HUNGER_INCREMENT);
     });
 
-    it("decrements fitness by 3", () => {
+    it("decrements fitness by FITNESS_DECREMENT", () => {
         const fido = new Pet("Fido");
         fido.growUp();
-        expect(fido.fitness).toBe(10-3);
+        expect(fido.fitness).toBe(START_FITNESS - FITNESS_DECREMENT);
     });
 
 });
 
 describe("walk", () => {
-    it("increments the pet's fitness by 4 every walk", () => {
+    it("increments the pet's fitness by FITNESS_INCREMENT every walk", () => {
         const fido = new Pet("Fido");
         fido.growUp();
         fido.growUp();
         fido.walk();
-        expect(fido.fitness).toBe(10-3-3+4);
+        expect(fido.fitness).toBe(
+            START_FITNESS 
+            - (2 * FITNESS_DECREMENT) 
+            + FITNESS_INCREMENT
+        );
     });
 
-    it("increments the pet's fitness to a max of 10", () => {
+    it("increments the pet's fitness to a max of MAXIMUM_FITNESS", () => {
         const fido = new Pet("Fido");
         fido.growUp();
         fido.walk();
-        expect(fido.fitness).toBe(10);
+        expect(fido.fitness).toBe(MAXIMUM_FITNESS);
         fido.growUp();
         fido.growUp();
         fido.growUp();
         fido.walk();
         fido.walk();
         fido.walk();
-        expect(fido.fitness).toBe(10);
+        expect(fido.fitness).toBe(MAXIMUM_FITNESS);
     });
   
 });
 
 describe("feed", () => {
-    it("decrements the pet's hunger by 3 every feed", () => {
+    it("decrements the pet's hunger by HUNGER_DECREMENT every feed", () => {
         const fido = new Pet("Fido");
         fido.growUp();
         fido.growUp();
         fido.feed();
-        expect(fido.hunger).toBe(7);
+        expect(fido.hunger).toBe(
+            START_HUNGER 
+            + (2 * HUNGER_INCREMENT) 
+            - HUNGER_DECREMENT
+        );
     });
 
-    it("decrements the pet's hunger to a minimum of 0", () => {
+    it("decrements the pet's hunger to a minimum of MINIMUM_HUNGER", () => {
         const fido = new Pet("Fido");
         fido.growUp();
         fido.feed();
         fido.feed();
-        expect(fido.hunger).toBe(0);
+        expect(fido.hunger).toBe(MINIMUM_HUNGER);
     });
 });
 
 describe("checkUp()", () => {
-    it("returns I need a walk where fitness < 4", () => {
+    it("returns I need a walk where fitness < WALK_TRIGGER", () => {
         const fido = new Pet("Fido");
-        fido.fitness = 2;
-        fido.hunger = 4;
+        fido.fitness = WALK_TRIGGER - 2;
+        fido.hunger = FEED_TRIGGER - 1;
         expect(fido.checkUp()).toBe("I need a walk");
     });
 
-    it("returns I hungry where fitness > 4", () => {
+    it("returns I hungry where fitness > FEED_TRIGGER", () => {
         const fido = new Pet("Fido");
-        fido.fitness = 4;
-        fido.hunger = 6;
+        fido.fitness = WALK_TRIGGER + 1;
+        fido.hunger = FEED_TRIGGER + 1;
         expect(fido.checkUp()).toBe("I am hungry");
     });
 
-    it("returns I am hungry AND I need a walk where fitness < 4 and hunger > 4", () => {
+    it("returns I am hungry AND I need a walk where fitness < WALK_TRIGGER and hunger > FEED_TRIGGER", () => {
         const fido = new Pet("Fido");
-        fido.fitness = 2;
-        fido.hunger = 6;
+        fido.fitness = WALK_TRIGGER - 1;
+        fido.hunger = FEED_TRIGGER + 1;
         expect(fido.checkUp()).toBe("I am hungry AND I need a walk");
     });
 
     it("returns I feel great when not hungry and not unfit", () => {
         const fido = new Pet("Fido");
-        fido.fitness = 4;
-        fido.hunger = 4;
+        fido.fitness = WALK_TRIGGER + 1;
+        fido.hunger = FEED_TRIGGER - 1;
         expect(fido.checkUp()).toBe("I feel great!");
     });
 });

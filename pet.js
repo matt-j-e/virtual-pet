@@ -1,38 +1,48 @@
+// Pet's birth values
+const START_HUNGER = 0;
+const START_FITNESS = 10;
+
+// Max / min settings
 const MAXIMUM_FITNESS = 10;
 const MINIMUM_HUNGER = 0;
 
 // Effects of growing up:
-const INCREASED_HUNGER = 5;
-const DECREASED_FITNESS = 3;
+const HUNGER_INCREMENT = 5;
+const FITNESS_DECREMENT = 3;
 
 // Effect of walking
-const INCREASED_FITNESS = 4;
+const FITNESS_INCREMENT = 4;
 
 // Effect of feeding
-const DECREASED_HUNGER = 3;
+const HUNGER_DECREMENT = 3;
+
+// Fitness level below which a walk is required
 const WALK_TRIGGER = 4;
+
+// Hunger level above which a feed is required
 const FEED_TRIGGER = 4;
 
-function Pet(name) {
+
+function Pet(name="Fido") {
     this.name = name;
     this.age = 0;
-    this.hunger = 0;
-    this.fitness = 10;
+    this.hunger = START_HUNGER;
+    this.fitness = START_FITNESS;
 }
 
 Pet.prototype.growUp = function() {
     this.age++
-    this.hunger += INCREASED_HUNGER;
-    this.fitness -= DECREASED_FITNESS;
+    this.hunger += HUNGER_INCREMENT;
+    this.fitness -= FITNESS_DECREMENT;
 }
 
 Pet.prototype.walk = function() {
-    this.fitness += INCREASED_FITNESS;
+    this.fitness += FITNESS_INCREMENT;
     if (this.fitness > MAXIMUM_FITNESS) this.fitness = MAXIMUM_FITNESS;
 }
 
 Pet.prototype.feed = function() {
-    this.hunger -= DECREASED_HUNGER;
+    this.hunger -= HUNGER_DECREMENT;
     if (this.hunger < MINIMUM_HUNGER) this.hunger = MINIMUM_HUNGER;
 
 }
@@ -51,5 +61,15 @@ Pet.prototype.checkUp = function() {
 
 
 module.exports = {
-    Pet
+    Pet,
+    START_HUNGER,
+    START_FITNESS,
+    MAXIMUM_FITNESS,
+    MINIMUM_HUNGER,
+    HUNGER_INCREMENT,
+    HUNGER_DECREMENT,
+    FITNESS_INCREMENT,
+    FITNESS_DECREMENT,
+    WALK_TRIGGER,
+    FEED_TRIGGER
 };
