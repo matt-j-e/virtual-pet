@@ -9,7 +9,8 @@ const {
     FITNESS_INCREMENT,
     FITNESS_DECREMENT,
     WALK_TRIGGER,
-    FEED_TRIGGER
+    FEED_TRIGGER,
+    DEATH_TRIGGER
 } = require("./pet.js");
 
 describe("Object setup", () => {
@@ -146,10 +147,18 @@ describe("checkUp()", () => {
 describe("isAlive()", () => {
     it("checks that 'true' is returned correctly based on the pet's current state", () => {
         const fido = new Pet("Fido");
-        fido.age = 29;
-        fido.hunger = 9;
-        fido.fitness = 1;
+        fido.age = DEATH_TRIGGER.age - 1;
+        fido.hunger = DEATH_TRIGGER.hunger - 1;
+        fido.fitness = DEATH_TRIGGER.fitness + 1;
         expect(fido.isAlive).toBe(true);
+    });
+
+    it("checks that 'false' is returned correctly based on the pet's current state", () => {
+        const fido = new Pet("Fido");
+        fido.age = DEATH_TRIGGER.age + 1;
+        fido.hunger = DEATH_TRIGGER.hunger + 1;
+        fido.fitness = DEATH_TRIGGER.fitness - 1;
+        expect(fido.isAlive).toBe(false);
     });
 });
 

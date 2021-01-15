@@ -22,6 +22,12 @@ const WALK_TRIGGER = 4;
 // Hunger level above which a feed is required
 const FEED_TRIGGER = 4;
 
+const DEATH_TRIGGER = {
+    fitness: 1, // fitness level of 0 or less
+    hunger: 9, // hunger level of 10 or more
+    age: 29 // age of 30 or more
+}
+
 
 function Pet(name="Fido") {
     this.name = name;
@@ -77,5 +83,6 @@ module.exports = {
     FITNESS_INCREMENT,
     FITNESS_DECREMENT,
     WALK_TRIGGER,
-    FEED_TRIGGER
+    FEED_TRIGGER,
+    DEATH_TRIGGER
 };
