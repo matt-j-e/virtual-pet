@@ -10,7 +10,8 @@ const {
     FITNESS_DECREMENT,
     WALK_TRIGGER,
     FEED_TRIGGER,
-    DEATH_TRIGGER
+    DEATH_TRIGGER,
+    DEAD_PARROT_MSG
 } = require("./pet.js");
 
 describe("Object setup", () => {
@@ -43,6 +44,12 @@ describe("Object setup", () => {
 
 describe("growUp", () => {
 
+    it("throws an error if the pet is not alive", () => {
+        const fido = new Pet("Fido");
+        fido.age = DEATH_TRIGGER.age;
+        expect(() => fido.growUp()).toThrow(DEAD_PARROT_MSG);
+    });
+
     it("increments the age by 1", () => {
         const fido = new Pet('Fido');
         fido.growUp();
@@ -64,28 +71,23 @@ describe("growUp", () => {
 });
 
 describe("walk", () => {
+
+    it("throws an error if the pet is not alive", () => {
+        const fido = new Pet("Fido");
+        fido.age = DEATH_TRIGGER.age;
+        expect(() => fido.walk()).toThrow(DEAD_PARROT_MSG);
+    });
+
     it("increments the pet's fitness by FITNESS_INCREMENT every walk", () => {
         const fido = new Pet("Fido");
-        fido.growUp();
-        fido.growUp();
+        fido.fitness = 3;
         fido.walk();
-        expect(fido.fitness).toBe(
-            START_FITNESS 
-            - (2 * FITNESS_DECREMENT) 
-            + FITNESS_INCREMENT
-        );
+        expect(fido.fitness).toBe(3 + FITNESS_INCREMENT);
     });
 
     it("increments the pet's fitness to a max of MAXIMUM_FITNESS", () => {
         const fido = new Pet("Fido");
-        fido.growUp();
-        fido.walk();
-        expect(fido.fitness).toBe(MAXIMUM_FITNESS);
-        fido.growUp();
-        fido.growUp();
-        fido.growUp();
-        fido.walk();
-        fido.walk();
+        fido.fitness = 9;
         fido.walk();
         expect(fido.fitness).toBe(MAXIMUM_FITNESS);
     });
@@ -93,14 +95,21 @@ describe("walk", () => {
 });
 
 describe("feed", () => {
+
+    it("throws an error if the pet is not alive", () => {
+        const fido = new Pet("Fido");
+        fido.age = DEATH_TRIGGER.age;
+        expect(() => fido.feed()).toThrow(DEAD_PARROT_MSG); // output from fido.feed has to be wrapped in its own callback for expect to work with toThrow
+    });
+
     it("decrements the pet's hunger by HUNGER_DECREMENT every feed", () => {
         const fido = new Pet("Fido");
         fido.growUp();
-        fido.growUp();
+        // fido.growUp();
         fido.feed();
         expect(fido.hunger).toBe(
             START_HUNGER 
-            + (2 * HUNGER_INCREMENT) 
+            + HUNGER_INCREMENT 
             - HUNGER_DECREMENT
         );
     });
@@ -112,9 +121,11 @@ describe("feed", () => {
         fido.feed();
         expect(fido.hunger).toBe(MINIMUM_HUNGER);
     });
+
 });
 
 describe("checkUp()", () => {
+
     it("returns I need a walk where fitness < WALK_TRIGGER", () => {
         const fido = new Pet("Fido");
         fido.fitness = WALK_TRIGGER - 2;
@@ -142,9 +153,17 @@ describe("checkUp()", () => {
         fido.hunger = FEED_TRIGGER - 1;
         expect(fido.checkUp()).toBe("I feel great!");
     });
+
+    it("returns Your pet is no longer alive :( when the pet is dead", () => {
+        const fido = new Pet("Fido");
+        fido.age = 30;
+        expect(fido.checkUp()).toBe(DEAD_PARROT_MSG);
+    });
+
 });
 
 describe("isAlive()", () => {
+
     it("checks that 'true' is returned correctly based on the pet's current state", () => {
         const fido = new Pet("Fido");
         fido.age = DEATH_TRIGGER.age - 1;
@@ -160,5 +179,6 @@ describe("isAlive()", () => {
         fido.fitness = DEATH_TRIGGER.fitness - 1;
         expect(fido.isAlive).toBe(false);
     });
+
 });
 

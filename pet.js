@@ -28,6 +28,8 @@ const DEATH_TRIGGER = {
     age: 30 // age of 30 or more
 }
 
+const DEAD_PARROT_MSG = "Your pet is pushing up the daisies :(";
+
 
 function Pet(name="Fido") {
     this.name = name;
@@ -43,23 +45,33 @@ Pet.prototype = {
 };
 
 Pet.prototype.growUp = function() {
-    this.age++
+    if (!this.isAlive) {
+        throw new Error(DEAD_PARROT_MSG);
+    }
+    this.age += 1;
     this.hunger += HUNGER_INCREMENT;
     this.fitness -= FITNESS_DECREMENT;
 }
 
 Pet.prototype.walk = function() {
+    if (!this.isAlive) {
+        throw new Error(DEAD_PARROT_MSG);
+    }
     this.fitness += FITNESS_INCREMENT;
     if (this.fitness > MAXIMUM_FITNESS) this.fitness = MAXIMUM_FITNESS;
 }
 
 Pet.prototype.feed = function() {
+    if (!this.isAlive) {
+        throw new Error(DEAD_PARROT_MSG);
+    }
     this.hunger -= HUNGER_DECREMENT;
     if (this.hunger < MINIMUM_HUNGER) this.hunger = MINIMUM_HUNGER;
 
 }
 
 Pet.prototype.checkUp = function() {
+    if (!this.isAlive) return DEAD_PARROT_MSG
     if (this.fitness < WALK_TRIGGER && this.hunger > FEED_TRIGGER) {
         return "I am hungry AND I need a walk";
     } else if (this.fitness < WALK_TRIGGER) {
@@ -84,5 +96,6 @@ module.exports = {
     FITNESS_DECREMENT,
     WALK_TRIGGER,
     FEED_TRIGGER,
-    DEATH_TRIGGER
+    DEATH_TRIGGER,
+    DEAD_PARROT_MSG
 };
