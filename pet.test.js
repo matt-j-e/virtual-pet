@@ -182,3 +182,13 @@ describe("isAlive()", () => {
 
 });
 
+describe("adoptChild()", () => {
+
+    it("checks that parent has a 'children' property which is an array with the first element being child", () => {
+        const parent = new Pet("Matt");
+        const child = new Pet("James");
+        parent.adoptChild(child);
+        expect(parent.children[0]).toEqual(child);
+    })
+
+})
