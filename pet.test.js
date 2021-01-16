@@ -47,7 +47,7 @@ describe("growUp", () => {
     it("throws an error if the pet is not alive", () => {
         const fido = new Pet("Fido");
         fido.age = DEATH_TRIGGER.age;
-        expect(() => fido.growUp()).toThrow(DEAD_PARROT_MSG);
+        expect(() => fido.growUp()).toThrow(`${fido.name} ${DEAD_PARROT_MSG}`);
     });
 
     it("increments the age by 1", () => {
@@ -75,7 +75,7 @@ describe("walk", () => {
     it("throws an error if the pet is not alive", () => {
         const fido = new Pet("Fido");
         fido.age = DEATH_TRIGGER.age;
-        expect(() => fido.walk()).toThrow(DEAD_PARROT_MSG);
+        expect(() => fido.walk()).toThrow(`${fido.name} ${DEAD_PARROT_MSG}`);
     });
 
     it("increments the pet's fitness by FITNESS_INCREMENT every walk", () => {
@@ -99,7 +99,7 @@ describe("feed", () => {
     it("throws an error if the pet is not alive", () => {
         const fido = new Pet("Fido");
         fido.age = DEATH_TRIGGER.age;
-        expect(() => fido.feed()).toThrow(DEAD_PARROT_MSG); // output from fido.feed has to be wrapped in its own callback for expect to work with toThrow
+        expect(() => fido.feed()).toThrow(`${fido.name} ${DEAD_PARROT_MSG}`); // output from fido.feed has to be wrapped in its own callback for expect to work with toThrow
     });
 
     it("decrements the pet's hunger by HUNGER_DECREMENT every feed", () => {
@@ -157,7 +157,7 @@ describe("checkUp()", () => {
     it("returns Your pet is no longer alive :( when the pet is dead", () => {
         const fido = new Pet("Fido");
         fido.age = 30;
-        expect(fido.checkUp()).toBe(DEAD_PARROT_MSG);
+        expect(fido.checkUp()).toBe(`${fido.name} ${DEAD_PARROT_MSG}`);
     });
 
 });
