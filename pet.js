@@ -36,6 +36,7 @@ function Pet(name="Matt Hancock") {
     this.age = 0;
     this.hunger = START_HUNGER;
     this.fitness = START_FITNESS;
+    this.children = [];
 }
 
 Pet.prototype = {
@@ -81,6 +82,11 @@ Pet.prototype.checkUp = function() {
     } else {
         return "I feel great!";
     }
+}
+
+Pet.prototype.haveBaby = function(name) {
+    const child = new Pet(name);
+    this.children.push(child);
 }
 
 

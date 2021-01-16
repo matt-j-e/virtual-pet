@@ -182,3 +182,13 @@ describe("isAlive()", () => {
 
 });
 
+describe("haveBaby()", () => {
+
+    it("checks that child is the first element of the parent's children property array and checks child's name matches", () => {
+        const parent = new Pet("Matt");
+        parent.haveBaby("James");
+        expect(parent.children[0]).toBeInstanceOf(Pet);
+        expect(parent.children[0].name).toBe("James");
+    })
+
+})
