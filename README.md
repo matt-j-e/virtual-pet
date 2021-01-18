@@ -2,6 +2,7 @@
 
 A JavaScript virtual pet built as a project as part of the Manchester Codes Software Engineer Fasttrack course.
 
+
 ## Contents
 
 ## General info
@@ -11,6 +12,7 @@ The idea of this virtual pet game is to look after your pet by feeding and exerc
 As your pet ages it needs to be fed and exercised and it will tell you what it wants at any time.
 
 Make sure you pay attention to its needs because if you don't ... it will die.
+
 
 ## Areas covered
 
@@ -30,12 +32,14 @@ At stages throughout this project I:
 * Rewound git and created a new branch
 * Implemented a different way to create a child from within an existing Pet instance on that new branch
 
-## Technologies & Languages
+
+## Technologies & Languages
 
 * JavaScript
 * Node & npm
 * Jest
 * Git & GitHub
+
 
 ## Features
 
@@ -47,6 +51,7 @@ At stages throughout this project I:
 * Triggers are set for hunger and fitness at which point the pet will ask for food, a walk, or both
 * If the pet gets too hungry or too unfit it will die (Triggers are configured)
 * The pet will die when it gets to a maximum age that can be configured (default = 30)
+
 
 ## Status
 * This project is complete
