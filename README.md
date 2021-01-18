@@ -29,11 +29,25 @@ At stages throughout this project I:
 * Learned about dependency injection so that the pet can adopt a child
 * Rewound git and created a new branch
 * Implemented a different way to create a child from within an existing Pet instance on that new branch
-* 
 
 ## Technologies & Languages
 
+* JavaScript
+* Node & npm
+* Jest
+* Git & GitHub
+
 ## Features
 
-## Status
+* The pet is born with an age of 0
+* Start values for hunger and fitness can be configured in the constants at the top of the file. Current value are 0 and 10
+* As the pet ages, its hunger and fitness values change at different rates, again these are configured in constants at the top.
+* Feeding reduces hunger by an amount defined in the constants
+* Walking increases fitness, also by an amount defined in the constants
+* Triggers are set for hunger and fitness at which point the pet will ask for food, a walk, or both
+* If the pet gets too hungry or too unfit it will die (Triggers are configured)
+* The pet will die when it gets to a maximum age that can be configured (default = 30)
 
+## Status
+* This project is complete
+* I also built a rudimentary GUI: https://matt-j-e.github.io/virtual-pet-gui/
