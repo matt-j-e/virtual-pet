@@ -5,6 +5,10 @@ A JavaScript virtual pet built as a project as part of the Manchester Codes Soft
 
 ## Contents
 * [General info](#general-info)
+* [Areas covered](#areas-covered)
+* [Technologies & languages](#technologies-&-languages)
+* [Features](#features)
+* [Status](#status)
 
 ## General info
 
