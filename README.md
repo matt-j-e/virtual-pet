@@ -4,7 +4,7 @@ A JavaScript virtual pet built as a project as part of the Manchester Codes Soft
 
 
 ## Contents
-* [here](#general-info)
+* [General info](#general-info)
 
 ## General info
 
