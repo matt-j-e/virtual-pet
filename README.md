@@ -6,7 +6,7 @@ A JavaScript virtual pet built as a project as part of the Manchester Codes Soft
 ## Contents
 * [General info](#general-info)
 * [Areas covered](#areas-covered)
-* [Technologies & languages](#technologies-languages)
+* [Technologies & languages](#technologies-and-languages)
 * [Features](#features)
 * [Status](#status)
 
@@ -38,7 +38,7 @@ At stages throughout this project I:
 * Implemented a different way to create a child from within an existing Pet instance on that new branch
 
 
-## Technologies & Languages
+## Technologies and languages
 
 * JavaScript
 * Node & npm
